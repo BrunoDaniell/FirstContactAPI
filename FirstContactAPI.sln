@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstContactAPI", "FirstContactAPI.csproj", "{5515ADAF-AD2A-4C43-B58C-CD18A1D95801}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5515ADAF-AD2A-4C43-B58C-CD18A1D95801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5515ADAF-AD2A-4C43-B58C-CD18A1D95801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5515ADAF-AD2A-4C43-B58C-CD18A1D95801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5515ADAF-AD2A-4C43-B58C-CD18A1D95801}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1846A05-B158-4A4E-A5FB-1D8CC8D93526}
+	EndGlobalSection
+EndGlobal
