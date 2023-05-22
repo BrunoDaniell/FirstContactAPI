@@ -10,10 +10,9 @@ namespace FirstContactAPI.Repository
 
         Task<FirstContact> Create(FirstContact firstContact);
 
-        Task Update( FirstContact firstContact);
+        Task Update(FirstContact firstContact);
 
         Task Delete(int Id);
 
     }
 }
-    
