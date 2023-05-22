@@ -23,9 +23,13 @@ namespace FirstContactAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<object>> GetFirstContacts([FromRoute] int id)
+        public async Task<IActionResult> GetFirstContacts([FromRoute] int id)
         {
-            return await _firstContactRepository.Get(id);
+            var document = await _firstContactRepository.Get(id);
+            if (document is null)
+                return NotFound($"Documento for Id: {id}");
+
+            return File(document.FileContent, "application/pdf", document.FileName);
         }
 
         [HttpPost]
