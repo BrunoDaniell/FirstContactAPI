@@ -1,13 +1,11 @@
 ﻿namespace FirstContactAPI.Model
 {
-    public class FirstContact
+    public class CandidateData
     {
+        public IFormFile File { get; set; }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public string FileName { get; set; }
-
-        public byte[] FileContent { get; set; }
     }
 }

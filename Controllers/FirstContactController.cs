@@ -1,38 +1,49 @@
 ﻿using FirstContactAPI.Model;
 using FirstContactAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 
 namespace FirstContactAPI.Controllers
 {
     [ApiController]
     [Route("Api/[controller]")]
-    
+
     public class FirstContactController : ControllerBase
     {
         private readonly IFirstContactRepository _firstContactRepository;
+
         public FirstContactController(IFirstContactRepository firstContactRepository)
         {
             _firstContactRepository = firstContactRepository;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<FirstContact>> GetFirstContacts()
+        public async Task<IEnumerable<object>> GetFirstContacts()
         {
             return await _firstContactRepository.Get();
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<FirstContact>> GetFirstContacts(int id)
+        public async Task<ActionResult<object>> GetFirstContacts(int id)
         {
             return await _firstContactRepository.Get(id);
         }
 
         [HttpPost]
-        public async Task<ActionResult<object>> PostFirstContacts([FromForm] FirstContact firstContact)
+        public async Task<ActionResult<object>> PostFirstContacts([FromForm] CandidateData candidateData)
         {
-            FirstContact newContact = await _firstContactRepository.Create(firstContact);
-            return CreatedAtAction(nameof(GetFirstContacts), new {id = newContact.Id}, newContact);
+            using var memoryStream = new MemoryStream();
+            await candidateData.File.CopyToAsync(memoryStream);
+
+            var firstContact = new FirstContact
+            {
+                Id = candidateData.Id,
+                Name = candidateData.Name,
+                FileName = candidateData.File.FileName,
+                FileContent = memoryStream.ToArray()
+            };
+
+            var newContact = await _firstContactRepository.Create(firstContact);
+            return CreatedAtAction(nameof(GetFirstContacts), new { id = newContact.Id }, newContact);
         }
 
         [HttpDelete("{Id}")]
@@ -48,12 +59,23 @@ namespace FirstContactAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> PutFirstContacts(int id, [FromBody] FirstContact firstContact)
+        public async Task<ActionResult> PutFirstContacts(int id, [FromForm] CandidateData candidateData)
         {
-            if (id != firstContact.Id)
+            if (id != candidateData.Id)
                 return BadRequest();
 
-                await _firstContactRepository.Update(firstContact);
+            using var memoryStream = new MemoryStream();
+            await candidateData.File.CopyToAsync(memoryStream);
+
+            var firstContact = new FirstContact
+            {
+                Id = candidateData.Id,
+                Name = candidateData.Name,
+                FileName = candidateData.File.FileName,
+                FileContent = memoryStream.ToArray()
+            };
+
+            await _firstContactRepository.Update(firstContact);
             return NoContent();
         }
     }
