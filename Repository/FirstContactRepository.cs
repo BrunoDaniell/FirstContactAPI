@@ -31,9 +31,9 @@ namespace FirstContactAPI.Repository
             return await _context.FirstContacts.ToListAsync();
         }
 
-        public async Task<FirstContact> Get(int Id)
+        public async Task<FirstContact> Get(int id)
         {
-            return await _context.FirstContacts.FindAsync(Id);
+            return await _context.FirstContacts.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         public async Task Update(FirstContact firstContact)

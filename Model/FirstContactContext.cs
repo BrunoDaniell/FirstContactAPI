@@ -8,7 +8,7 @@ namespace FirstContactAPI.Model
 
         public FirstContactContext(DbContextOptions<FirstContactContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.EnsureCreatedAsync().Wait();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

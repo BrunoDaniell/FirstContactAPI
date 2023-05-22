@@ -22,8 +22,8 @@ namespace FirstContactAPI.Controllers
             return await _firstContactRepository.Get();
         }
 
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<object>> GetFirstContacts(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<object>> GetFirstContacts([FromRoute] int id)
         {
             return await _firstContactRepository.Get(id);
         }
@@ -46,8 +46,8 @@ namespace FirstContactAPI.Controllers
             return CreatedAtAction(nameof(GetFirstContacts), new { id = newContact.Id }, newContact);
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] int id)
         {
             var contactToDelete = await _firstContactRepository.Get(id);
 
